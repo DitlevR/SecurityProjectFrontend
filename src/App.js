@@ -12,7 +12,7 @@ import AllPosts from './components/loggedIn/AllPosts';
 
 function App() {
 
-    const [loggedIn, setLoggedIn] = useState(true);
+    const [loggedIn, setLoggedIn] = useState(false);
 
     return (
         <div>
