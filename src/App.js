@@ -9,10 +9,11 @@ import Login from './components/Login';
 import CustomNavbar from './components/loggedIn/Navbar';
 import MyPosts from './components/loggedIn/MyPosts';
 import AllPosts from './components/loggedIn/AllPosts';
+import ReadPost from './components/loggedIn/ReadPost';
 
 function App() {
 
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(true);
 
     return (
         <div>
@@ -41,6 +42,10 @@ function App() {
 
                                     <Route exact path="/allposts">
                                         <AllPosts h3={styles.h3} />
+                                    </Route>
+
+                                    <Route exact path="/readpost/:postid">
+                                        <ReadPost />
                                     </Route>
 
                                 </Col>

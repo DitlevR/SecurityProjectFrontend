@@ -1,12 +1,13 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 const AllPosts = ({ h3 }) => {
 
     return (
         <div>
             <h3 style={h3}>All Posts</h3>
-            <Table striped>
+            <Table striped hover>
                 <thead>
                     <tr>
                         <th style={{ width: "90%" }}>Title</th>
@@ -15,15 +16,15 @@ const AllPosts = ({ h3 }) => {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>How to store password securely</td>
+                        <td><Link to="/readpost/1">How to store password securely</Link></td>
                         <td>16</td>
                     </tr>
                     <tr>
-                        <td>The best chocolate cake recipe!</td>
+                        <td><Link>The best chocolate cake recipe!</Link></td>
                         <td>992</td>
                     </tr>
                     <tr>
-                        <td>Should you learn ReactJS in 2020?</td>
+                        <td><Link>Should you learn ReactJS in 2020?</Link></td>
                         <td>2</td>
                     </tr>
                 </tbody>
