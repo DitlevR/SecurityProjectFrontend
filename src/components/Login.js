@@ -6,7 +6,7 @@ const Login = ({setLoggedIn}) => {
         <Container style={styles.container} fluid>
             <Row style={styles.row}>
                 <Col style={styles.col} md={4}>
-                    <h3 style={styles.h3}>Login / Create an account</h3>
+                    <h5 style={styles.h5}>Use this form to login or create an account</h5>
 
                     <Form>
                         <Form.Group controlId="usernameGroup">
@@ -23,7 +23,7 @@ const Login = ({setLoggedIn}) => {
                                 Log in
                             </Button>
                             <center style={{padding: 10}}>or</center>
-                            <Button variant="outline-success" size="lg" block>
+                            <Button variant="success" size="lg" block>
                                 Create an account
                             </Button>
                         </>
@@ -54,8 +54,9 @@ const styles = {
         border: "1px solid #c1c1c1",
         backgroundColor: "white"
     },
-    h3: {
+    h5: {
         marginTop: 0,
+        paddingBottom: 20,
         color: "#414141",
         fontFamily: "Arial"
     }

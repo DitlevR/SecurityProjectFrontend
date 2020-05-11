@@ -7,7 +7,7 @@ const ReadPost = () => {
             <h2>
                 How to store password securely
             </h2>
-            <span>By: John Doe - 11-05-2020</span>
+            <span>Written by John Doe - 11-05-2020</span>
             <p style={{marginTop: 20, marginBottom: 20}}>
                 Lorem Ipsum er ganske enkelt fyldtekst fra print- og typografiindustrien.
                 Lorem Ipsum har været standard fyldtekst siden 1500-tallet,
@@ -78,9 +78,10 @@ const styles = {
         marginTop: 10
     },
     commentInfo:{
-        color: "#007bff"
+        color: "#717171"
     },
     commentText:{
+        fontSize: 14,
         margin: 0
     },
 }

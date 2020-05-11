@@ -2,7 +2,9 @@ import React from 'react';
 import { Table, Button, ButtonGroup } from 'react-bootstrap';
 
 const MyPosts = ({ h3 }) => {
-
+    const deletePost = () => {
+        alert("okay");
+    }
     return (
         <div>
             <h3 style={h3}>My Posts</h3>
@@ -21,7 +23,7 @@ const MyPosts = ({ h3 }) => {
                         <td>
                             <ButtonGroup className="mb-2" size="sm">
                                 <Button variant="secondary">Edit</Button>
-                                <Button variant="warning">Delete</Button>
+                                <Button variant="warning" onClick={() => {if(window.confirm('Are you sure you wish to delete this post?')) return deletePost()}}>Delete</Button>
                             </ButtonGroup>
                         </td>
                     </tr>
