@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 
 const ReadPost = () => {
 
@@ -8,7 +9,7 @@ const ReadPost = () => {
                 How to store password securely
             </h2>
             <span>Written by John Doe - 11-05-2020</span>
-            <p style={{marginTop: 20, marginBottom: 20}}>
+            <p style={{ marginTop: 20, marginBottom: 20 }}>
                 Lorem Ipsum er ganske enkelt fyldtekst fra print- og typografiindustrien.
                 Lorem Ipsum har været standard fyldtekst siden 1500-tallet,
                 hvor en ukendt trykker sammensatte en tilfældig spalte for
@@ -37,26 +38,38 @@ const ReadPost = () => {
                 som indeholdt afsnit med Lorem Ipsum, og senere med layoutprogrammer som Aldus PageMaker,
                 som også indeholdt en udgave af Lorem Ipsum.
             </p>
-            <hr/>
+            <hr />
             <h5>Comments</h5>
             <ul style={styles.ul}>
 
 
                 <li style={styles.comment}>
                     <p style={styles.commentText}>
-                        Der er mange tilgængelige udgaver af Lorem Ipsum, men de fleste udgaver har gennemgået forandringer, 
-                        når nogen har tilføjet humor eller tilfældige ord, som på ingen måde ser ægte ud. 
-                        Hvis du skal bruge en udgave af Lorem Ipsum, skal du sikre dig, 
-                        at der ikke indgår noget pinligt midt i teksten. 
+                        Der er mange tilgængelige udgaver af Lorem Ipsum, men de fleste udgaver har gennemgået forandringer,
+                        når nogen har tilføjet humor eller tilfældige ord, som på ingen måde ser ægte ud.
+                        Hvis du skal bruge en udgave af Lorem Ipsum, skal du sikre dig,
+                        at der ikke indgår noget pinligt midt i teksten.
                     </p>
-                    <small style={styles.commentInfo}>James Cordon - 19-05-2020</small>
+                    <hr style={{marginTop: "10px", marginBottom: "10px"}}/>
+                    <small style={styles.commentInfo}>
+                        <div>Tom Smith - 15-05-2020</div>
+                        <Button variant="danger" size="sm" style={{fontSize: "12px"}}>
+                            Delete
+                        </Button>
+                    </small>
                 </li>
 
                 <li style={styles.comment}>
                     <p style={styles.commentText}>
                         Great post!
                     </p>
-                    <small style={styles.commentInfo}> Tom Smith - 15-05-2020</small>
+                    <hr style={{marginTop: "10px", marginBottom: "10px"}}/>
+                    <small style={styles.commentInfo}>
+                        <div>Tom Smith - 15-05-2020</div>
+                        <Button variant="danger" size="sm" style={{fontSize: "12px"}}>
+                            Delete
+                        </Button>
+                    </small>
                 </li>
 
             </ul>
@@ -77,13 +90,21 @@ const styles = {
         padding: 10,
         marginTop: 10
     },
-    commentInfo:{
-        color: "#717171"
+    commentInfo: {
+        color: "#717171",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center"
     },
-    commentText:{
+    commentText: {
         fontSize: 14,
         margin: 0
     },
+    delete: {
+        fontWeight: "bold",
+        color: "red"
+    }
 }
 
 export default ReadPost;

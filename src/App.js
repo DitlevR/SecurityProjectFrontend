@@ -7,6 +7,7 @@ import './App.css';
 
 import Login from './components/Login';
 import CustomNavbar from './components/loggedIn/Navbar';
+import Search from './components/loggedIn/Search';
 import MyPosts from './components/loggedIn/MyPosts';
 import AllPosts from './components/loggedIn/AllPosts';
 import ReadPost from './components/loggedIn/ReadPost';
@@ -35,6 +36,11 @@ function App() {
                                     <Route exact path="/">
                                         <center>You've been successfully logged in!</center>
                                     </Route>
+
+                                    <Route exact path="/search">
+                                        <Search h3={styles.h3} />
+                                    </Route>
+
 
                                     <Route exact path="/myposts">
                                         <MyPosts h3={styles.h3} />

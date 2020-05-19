@@ -8,6 +8,7 @@ const CustomNavbar = ({setLoggedIn}) => {
         <Navbar bg="primary" variant="dark">
             <Navbar.Brand href="#home">Security Exam</Navbar.Brand>
             <Nav className="mr-auto">
+                <NavLink to="/search" className="nav-link">Search</NavLink>
                 <NavLink to="/myposts" className="nav-link">My posts</NavLink>
                 <NavLink to="/allposts" className="nav-link">All posts</NavLink>
                 <Nav.Link onClick={() => setLoggedIn(false)}>Log out</Nav.Link>
