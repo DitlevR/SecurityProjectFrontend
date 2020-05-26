@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch, NavLink, Redirect } from 'react-router-dom';
 
+import facade from './apiFacade';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import './App.css';
@@ -14,7 +16,7 @@ import ReadPost from './components/loggedIn/ReadPost';
 
 function App() {
 
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(true);
 
     return (
         <div>
@@ -47,11 +49,11 @@ function App() {
                                     </Route>
 
                                     <Route exact path="/allposts">
-                                        <AllPosts h3={styles.h3} />
+                                        <AllPosts fetchAllEntries={facade.fetchAllEntries} h3={styles.h3} />
                                     </Route>
 
-                                    <Route exact path="/readpost/:postid">
-                                        <ReadPost />
+                                    <Route exact path="/readpost/:entryid">
+                                        <ReadPost fetchEntryById={facade.fetchEntryById} deleteComment={facade.deleteComment} />
                                     </Route>
 
                                 </Col>

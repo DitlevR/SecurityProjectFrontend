@@ -1,78 +1,67 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from "react";
+import { useRouteMatch, Redirect } from "react-router-dom";
 import { Button } from 'react-bootstrap';
+import {Helmet} from 'react-helmet';
 
-const ReadPost = () => {
+const ReadPost = ({ fetchEntryById, deleteComment }) => {
+    const match = useRouteMatch();
+    const [blogEntry, setBlogEntry] = useState({ user: {}, comments: [] });
+    const [commentsAsString, setCommentsAsString] = useState(null);
+
+    useEffect(() => {
+        fetchEntryById(match.params.entryid)
+            .then(res => {
+                if (res.id){
+                    setBlogEntry(res);
+                    //setCommentsAsString(res.comments.map(comment => comment.content).join(""));
+                }
+            });
+    }, []);
+
+    const deleteCommentHandler = id => {
+        deleteComment(id)
+        .then(res => {
+            console.log(res)
+        })
+    }
 
     return (
         <div>
-            <h2>
-                How to store password securely
-            </h2>
-            <span>Written by John Doe - 11-05-2020</span>
-            <p style={{ marginTop: 20, marginBottom: 20 }}>
-                Lorem Ipsum er ganske enkelt fyldtekst fra print- og typografiindustrien.
-                Lorem Ipsum har været standard fyldtekst siden 1500-tallet,
-                hvor en ukendt trykker sammensatte en tilfældig spalte for
-                at trykke en bog til sammenligning af forskellige skrifttyper.
-                Lorem Ipsum har ikke alene overlevet fem århundreder,
-                men har også vundet indpas i elektronisk typografi uden væsentlige ændringer.
-                Sætningen blev gjordt kendt i 1960'erne med lanceringen af Letraset-ark,
-                som indeholdt afsnit med Lorem Ipsum, og senere med layoutprogrammer som Aldus PageMaker,
-                som også indeholdt en udgave af Lorem Ipsum.
-                Lorem Ipsum er ganske enkelt fyldtekst fra print- og typografiindustrien.
-                Lorem Ipsum har været standard fyldtekst siden 1500-tallet,
-                hvor en ukendt trykker sammensatte en tilfældig spalte for
-                at trykke en bog til sammenligning af forskellige skrifttyper.
-                Lorem Ipsum har ikke alene overlevet fem århundreder,
-                men har også vundet indpas i elektronisk typografi uden væsentlige ændringer.
-                Sætningen blev gjordt kendt i 1960'erne med lanceringen af Letraset-ark,
-                som indeholdt afsnit med Lorem Ipsum, og senere med layoutprogrammer som Aldus PageMaker,
-                som også indeholdt en udgave af Lorem Ipsum.
-                Lorem Ipsum er ganske enkelt fyldtekst fra print- og typografiindustrien.
-                Lorem Ipsum har været standard fyldtekst siden 1500-tallet,
-                hvor en ukendt trykker sammensatte en tilfældig spalte for
-                at trykke en bog til sammenligning af forskellige skrifttyper.
-                Lorem Ipsum har ikke alene overlevet fem århundreder,
-                men har også vundet indpas i elektronisk typografi uden væsentlige ændringer.
-                Sætningen blev gjordt kendt i 1960'erne med lanceringen af Letraset-ark,
-                som indeholdt afsnit med Lorem Ipsum, og senere med layoutprogrammer som Aldus PageMaker,
-                som også indeholdt en udgave af Lorem Ipsum.
-            </p>
-            <hr />
-            <h5>Comments</h5>
-            <ul style={styles.ul}>
-
-
-                <li style={styles.comment}>
-                    <p style={styles.commentText}>
-                        Der er mange tilgængelige udgaver af Lorem Ipsum, men de fleste udgaver har gennemgået forandringer,
-                        når nogen har tilføjet humor eller tilfældige ord, som på ingen måde ser ægte ud.
-                        Hvis du skal bruge en udgave af Lorem Ipsum, skal du sikre dig,
-                        at der ikke indgår noget pinligt midt i teksten.
-                    </p>
-                    <hr style={{marginTop: "10px", marginBottom: "10px"}}/>
-                    <small style={styles.commentInfo}>
-                        <div>Tom Smith - 15-05-2020</div>
-                        <Button variant="danger" size="sm" style={{fontSize: "12px"}}>
-                            Delete
-                        </Button>
-                    </small>
-                </li>
-
-                <li style={styles.comment}>
-                    <p style={styles.commentText}>
-                        Great post!
-                    </p>
-                    <hr style={{marginTop: "10px", marginBottom: "10px"}}/>
-                    <small style={styles.commentInfo}>
-                        <div>Tom Smith - 15-05-2020</div>
-                        <Button variant="danger" size="sm" style={{fontSize: "12px"}}>
-                            Delete
-                        </Button>
-                    </small>
-                </li>
-
-            </ul>
+            {
+                blogEntry.id ? (
+                    <div>
+                        <h2>
+                            {blogEntry.title}
+                        </h2>
+                        <span>Written by {blogEntry.user.userName} - {blogEntry.dateOfCreation}</span>
+                        <p style={{ marginTop: 20, marginBottom: 20 }}>
+                            {blogEntry.content}
+                        </p>
+                        <hr />
+                        <h5>Comments</h5>
+                        <ul style={styles.ul}>
+                            {
+                                blogEntry.comments.map(comment => {
+                                    return (
+                                        <li key={comment.id} style={styles.comment}>
+                                            <p style={styles.commentText} dangerouslySetInnerHTML={{
+                                                __html: comment.content
+                                                }} />
+                                            <hr style={{ marginTop: "10px", marginBottom: "5px" }} />
+                                            <small style={styles.commentInfo}>
+                                                <div>{comment.user.userName}</div>
+                                                <Button variant="danger" size="sm" style={{ fontSize: "12px" }} onClick={() => {deleteCommentHandler(comment.id)}}> Delete</Button>
+                                            </small>
+                                        </li>
+                                    );
+                                })
+                            }
+                        </ul>
+                    </div>
+                ) : (
+                    <div style={{textAlign: "center"}}>The requested blog entry doesn't exist.</div>
+                )
+            }
         </div>
     )
 }
