@@ -1,36 +1,42 @@
-import React from 'react';
-import { Table } from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const AllPosts = ({ h3 }) => {
+  const url = "http://localhost:8080/securitybackendflaws/api/blogentry/all";
 
-    return (
-        <div>
-            <h3 style={h3}>All Posts</h3>
-            <Table striped hover>
-                <thead>
-                    <tr>
-                        <th style={{ width: "90%" }}>Title</th>
-                        <th style={{ width: "10%" }}>Comments</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><Link to="/readpost/1">How to store password securely</Link></td>
-                        <td>16</td>
-                    </tr>
-                    <tr>
-                        <td><Link>The best chocolate cake recipe!</Link></td>
-                        <td>992</td>
-                    </tr>
-                    <tr>
-                        <td><Link>Should you learn ReactJS in 2020?</Link></td>
-                        <td>2</td>
-                    </tr>
-                </tbody>
-            </Table>
-        </div >
-    )
-}
+  const [data, setData] = useState({ blogentry: [] });
+
+  useEffect(() => {
+    fetch(url)
+      .then((response) => response.json())
+      .then((json) => setData({ blogentry: json }));
+  }, []);
+
+  return (
+    <div>
+      <Table striped hover>
+        <h3 style={h3}>All Posts</h3>
+
+        <thead>
+          <tr>
+            <th style={{ width: "90%" }}>Title</th>
+            <th style={{ width: "10%" }}>Comments</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {data.blogentry.map((entry) => (
+            <div>
+              <tr>
+                <td>{entry.title}</td>
+              </tr>
+            </div>
+          ))}
+        </tbody>
+      </Table>
+    </div>
+  );
+};
 
 export default AllPosts;
