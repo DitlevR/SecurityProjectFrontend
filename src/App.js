@@ -16,17 +16,24 @@ import ReadPost from './components/loggedIn/ReadPost';
 
 function App() {
 
-    const [loggedIn, setLoggedIn] = useState(true);
+    useEffect(() => {
+        if(facade.loggedIn && loggedIn === false){
+            facade.validateToken(setLoggedIn)
+        }
+    }, [])
+
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [role, setRole] = useState(null);
 
     return (
         <div>
             <Router>
-                {!loggedIn ? (<Redirect to="/login" />) : (<CustomNavbar setLoggedIn={setLoggedIn} />)}
+                {!loggedIn ? (<Redirect to="/login" />) : (<CustomNavbar setLoggedIn={setLoggedIn} logout={facade.logout} />)}
 
                 <Switch>
                     <Route exact path="/login">
                         {loggedIn ? (<Redirect to="/" />) : null}
-                        <Login setLoggedIn={setLoggedIn} />
+                        <Login setLoggedIn={setLoggedIn} setRole={setRole} login={facade.login} />
                     </Route>
 
                     <Route path="/">
